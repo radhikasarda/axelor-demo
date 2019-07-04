@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<menuitem name="employee-details-book"
+		title="Employee Details Book" icon="fa-book" icon-background="green" />
+
+	<menuitem name="employee-details"
+		parent="employee-details-book" title="All Employees"
+		action="employee.all" />
+
+	<action-view name="employee.all" title="Employees"
+		model="com.axelor.employeeDetails.db.Employee">
+		<view type="grid" name="employee-grid" />
+		<view type="form" name="employee-form" />
+
+	</action-view>
+
+	<menuitem title="Phone Details" name="phone-deatils"
+		parent="employee-details-book" action="phone.all" />
+
+	<action-view name="phone.all" title="Phones"
+		model="com.axelor.employeeDetails.db.Phone">
+		<view type="grid" name="phone-grid" />
+		<view type="form" name="phone-form" />
+	</action-view>
+
+	<menuitem title="Address Details" name="address-deatils"
+		parent="employee-details-book" action="address.all" />
+
+	<action-view name="address.all" title="Address"
+		model="com.axelor.employeeDetails.db.Address">
+		<view type="grid" name="address-grid" />
+		<view type="form" name="address-form" />
+	</action-view>
+
+	<menuitem title="Project Details" name="project-deatils"
+		parent="employee-details-book" action="project.all" />
+
+	<action-view name="project.all" title="Project"
+		model="com.axelor.employeeDetails.db.Project">
+		<view type="grid" name="project-grid" />
+		<view type="form" name="project-form" />
+	</action-view>
+
+	<menuitem title="Department Details" name="department-deatils"
+		parent="employee-details-book" action="department.all" />
+
+	<action-view name="department.all" title="Department"
+		model="com.axelor.employeeDetails.db.Department">
+		<view type="grid" name="department-grid" />
+		<view type="form" name="department-form" />
+	</action-view>
+
+	<menuitem name="menu-department-details-tree"
+		parent="employee-details-book" title="All Departments (tree)"
+		action="department.details.tree" />
+
+	<action-view name="department.details.tree"
+		title="All Department">
+		<view type="tree" name="department-details-tree" />
+	</action-view>
+
+</object-views>

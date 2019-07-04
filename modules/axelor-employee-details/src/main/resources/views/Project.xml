@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+  <grid name="project-grid" title="Project"
+		model="com.axelor.employeeDetails.db.Project">
+		<field name="name"/>
+        <field name="manager"/>
+        <field name="startDate"/>
+		<field name="endDate"/>
+	</grid>
+	<form name="project-form" title="Project"
+		model="com.axelor.employeeDetails.db.Project">
+		<panel title="Project Details" css="panel-blue">
+		<field name="department">
+		<editor>
+		<field name="name"></field>
+		</editor>
+		</field>
+		<field name="name"/>
+        <field name="manager"/>
+        <field name="startDate"/>
+		<field name="endDate"/>
+		</panel>
+	</form>
+</object-views>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+	<grid name="phone-grid" title="Phone"
+		model="com.axelor.employeeDetails.db.Phone">
+		<field name="contactNumber" />
+		<field name="alternateNumber" />
+	</grid>
+	<form name="phone-form" title="Phone"
+		model="com.axelor.employeeDetails.db.Phone">
+		<panel title="Contact Details" css="panel-blue">
+			<field name="contactNumber" colSpan="4" />
+			<field name="alternateNumber" colSpan="4" />
+		</panel>
+	</form>
+</object-views>

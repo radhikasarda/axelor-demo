@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<grid name="employee-grid" title="Employees"
+		model="com.axelor.employeeDetails.db.Employee">
+		<field name="fullName" />
+		<field name="dateOfBirth" />
+		<field name="gender" />
+		<field name="phones" />
+	</grid>
+	<selection name="gender.type.selection">
+		<option value="Male">Male</option>
+		<option value="Female">Female</option>
+	</selection>
+	<form name="employee-form" title="Employee"
+		model="com.axelor.employeeDetails.db.Employee" css="panel-blue">
+		<panel title="Personal Information" css="panel-red">
+			<panel colSpan="4">
+				<field name="image" showTitle="false" colSpan="12" />
+			</panel>
+			<panel colSpan="8">
+				<field name="fullName" readonly="false" colSpan="12">
+					<editor>
+						<field name="firstName" colSpan="5">
+							<hilite color="danger" strong="true"
+								if="$contains(firstName, 'aaa')" />
+						</field>
+						<field name="lastName" colSpan="5" />
+					</editor>
+				</field>
+				<field name="dateOfBirth" colSpan="5" />
+				<field name="gender" selection="gender.type.selection"
+					colSpan="5" />
+				<field name="email" widget="email" colSpan="5" />
+
+
+			</panel>
+		</panel>
+
+		<panel-related field="phones" css="panel-green"
+			title="Contact Information">
+			<field name="contactNumber" />
+			<field name="alternateNumber" />
+		</panel-related>
+
+		<panel title="Address Information" css="panel-red">
+			<field name="address" colSpan="12">
+				<editor>
+					<field name="street" />
+					<field name="area" />
+					<field name="city" />
+					<field name="zip" />
+					<field name="state" />
+					<field name="country" />
+				</editor>
+			</field>
+		</panel>
+		<panel title="Department Information" css="panel-green">
+
+			<field name="department" colSpan="12">
+				<editor>
+					<field name="name" />
+				</editor>
+			</field>
+		</panel>
+		<panel-related field="project" css="panel-red"
+			title="Project Information" domain="self.department= :department"
+			canNew="false">
+			<field name="name" />
+			<field name="manager" />
+			<field name="startDate" />
+			<field name="endDate" />
+		</panel-related>
+
+	</form>
+	<!-- Tree name -->
+	<tree name="department-details-tree" title="All Employees">
+
+		<!-- define tree columns -->
+		<column name="name" type="string" />
+		<column name="startDate" type="string" />
+		<column name="endDate" type="string" />
+
+		<!-- define 1st level node -->
+		<node model="com.axelor.employeeDetails.db.Department"
+			onClick="projects.task.open.department">
+			<field name="name" as="name" />
+		</node>
+
+		<!-- define 2nd level node -->
+		<node model="com.axelor.employeeDetails.db.Project"
+			parent="department" draggable="true"
+			onClick="projects.task.open.project">
+			<field name="name" as="name" />
+			<field name="startDate" as="startDate" />
+			<field name="endDate" as="endDate" />
+		</node>
+
+	</tree>
+	<action-view name="projects.task.open.department"
+		title="Department" model="com.axelor.employeeDetails.db.Department">
+		<view type="grid" name="department-grid" />
+		<view type="form" name="department-form" />
+		<domain>self.id = :department_id</domain>
+		<context name="department_id" expr="eval: id" />
+		<context name="_showSingle" expr="true" />
+	</action-view>
+
+	<action-view name="projects.task.open.project"
+		title="Project" model="com.axelor.employeeDetails.db.Project">
+		<view type="grid" name="project-grid" />
+		<view type="form" name="project-form" />
+		<domain>self.id = :project_id</domain>
+		<context name="project_id" expr="eval: id" />
+		<context name="_showSingle" expr="true" />
+	</action-view>
+
+</object-views>
