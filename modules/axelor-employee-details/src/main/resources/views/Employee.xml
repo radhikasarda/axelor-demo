@@ -118,4 +118,30 @@
 		<context name="_showSingle" expr="true" />
 	</action-view>
 
+	 <cards name="employee-card" title="Employees" model="com.axelor.employeeDetails.db.Employee" orderBy="fullName">
+    <field name="fullName" />
+    <field name="phone" />
+    <field name="email" />
+    <field name="address" />
+    <field name="hasImage" />
+    <template><![CDATA[
+      <div class="span4 card-image">
+        <img ng-if="hasImage" ng-src="{{$image(null, 'image')}}">
+        <img ng-if="!hasImage" src="img/user.png">
+        <strong>{{fullName}}</strong>
+      </div>
+     
+      <div class="span8">
+        <address>
+          Street:{{address.street}} Area:{{address.area}}<br>
+          City:{{address.city}}<span ng-if="address.state">, State:{{address.state}}</span><br>
+          Country:{{address.country}}<br>
+          <strong><abbr ng-if="phone" title="Phone">P:</abbr> {{phone.contactNumber}}<br>
+          <abbr ng-if="email" title="Email">E:</abbr> {{email}}<br></strong>
+        </address>
+      </div>
+    ]]></template>
+  </cards>
+
+
 </object-views>
