@@ -10,6 +10,8 @@
 		package="com.axelor.employeeDetails.db" />
 	<entity name="Project">
 	<string name="name" required="true"/>
+	<integer name="progress" selection="progress.type.selection"/>
+	<integer name="priority"/>
 	<string name="manager"/>
 	<date name="startDate"/>
 	<date name="endDate"/>

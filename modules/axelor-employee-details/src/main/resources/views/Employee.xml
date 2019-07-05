@@ -15,6 +15,12 @@
 		<option value="Male">Male</option>
 		<option value="Female">Female</option>
 	</selection>
+	<selection name="progress.type.selection">
+		<option value="1">To-do</option>
+		<option value="2">In progress</option>
+		<option value="3">Completed</option>
+	</selection>
+
 	<form name="employee-form" title="Employee"
 		model="com.axelor.employeeDetails.db.Employee" css="panel-blue">
 		<panel title="Personal Information" css="panel-red">
@@ -73,6 +79,8 @@
 			<field name="manager" />
 			<field name="startDate" />
 			<field name="endDate" />
+			<field name="progress" />
+			<field name="priority" />
 		</panel-related>
 
 	</form>
@@ -118,13 +126,14 @@
 		<context name="_showSingle" expr="true" />
 	</action-view>
 
-	 <cards name="employee-card" title="Employees" model="com.axelor.employeeDetails.db.Employee" orderBy="fullName">
-    <field name="fullName" />
-    <field name="phone" />
-    <field name="email" />
-    <field name="address" />
-    <field name="hasImage" />
-    <template><![CDATA[
+	<cards name="employee-card" title="Employees"
+		model="com.axelor.employeeDetails.db.Employee" orderBy="fullName">
+		<field name="fullName" />
+		<field name="phone" />
+		<field name="email" />
+		<field name="address" />
+		<field name="hasImage" />
+		<template><![CDATA[
       <div class="span4 card-image">
         <img ng-if="hasImage" ng-src="{{$image(null, 'image')}}">
         <img ng-if="!hasImage" src="img/user.png">
@@ -141,7 +150,21 @@
         </address>
       </div>
     ]]></template>
-  </cards>
+	</cards>
 
-
+	<kanban name="project-kanban" title="Projects"
+		model="com.axelor.employeeDetails.db.Project" columnBy="progress"
+		sequenceBy="priority" limit="10" >
+		<field name="name" />
+		<field name="startDate" />
+		<field name="endDate" />
+		<template><![CDATA[
+ 		<h4>{{name}}</h4>
+		<div class="card-body">Start Date:{{startDate}}</div>
+		<div class="card-body">End Date:{{endDate}}</div>
+   <div class="card-footer">
+      <i class='fa fa-clock-o'></i> <span>{{startDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+    ]]></template>
+	</kanban>
 </object-views>

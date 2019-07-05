@@ -14,9 +14,9 @@
 	<action-view name="employee.all" title="Employees"
 		model="com.axelor.employeeDetails.db.Employee">
 		<view type="grid" name="employee-grid" />
-		<view type="form" name="employee-form"/>
-		<view type="cards" name="employee-card"/>
-		<context name="json-enhance" expr="true"/>
+		<view type="form" name="employee-form" />
+		<view type="cards" name="employee-card" />
+		<context name="json-enhance" expr="true" />
 
 	</action-view>
 
@@ -45,6 +45,8 @@
 		model="com.axelor.employeeDetails.db.Project">
 		<view type="grid" name="project-grid" />
 		<view type="form" name="project-form" />
+		<view type="kanban" name="project-kanban" />
+		
 	</action-view>
 
 	<menuitem title="Department Details" name="department-deatils"
@@ -64,5 +66,14 @@
 		title="All Department">
 		<view type="tree" name="department-details-tree" />
 	</action-view>
+<!-- 
+	<menuitem name="menu-my-project"
+		parent="employee-details-book" title="My Projects(Kanban-View)"
+		action="my.projects.all" />
 
+	<action-view name="my.projects.all" title="All Projects"
+		model="com.axelor.employeeDetails.db.Project">
+		<view type="kanban" name="project-kanban" />
+		<view type="form" name="project-form" />
+	</action-view> -->
 </object-views>
