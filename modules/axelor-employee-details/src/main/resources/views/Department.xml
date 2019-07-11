@@ -3,14 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
-  <grid name="department-grid" title="Department"
+	<grid name="department-grid" title="Department"
 		model="com.axelor.employeeDetails.db.Department">
-		<field name="name"/>
+		<field name="name" />
 	</grid>
 	<form name="department-form" title="Department"
 		model="com.axelor.employeeDetails.db.Department">
 		<panel title="Department Details" css="panel-blue">
-			<field name="name"/>
+			<field name="name" />
 
 		</panel>
 	</form>

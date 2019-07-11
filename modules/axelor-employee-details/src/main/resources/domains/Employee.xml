@@ -23,15 +23,17 @@
    
     ]]></string>
 		<date name="dateOfBirth" />
-		<binary name="image" title="Photo" help="Max size 4MB."
-			image="true" />
+		<!-- <binary name="image" title="Photo" help="Max size 4MB."
+			image="true" /> -->
+		<one-to-one name="image" ref="com.axelor.meta.db.MetaFile"/>
 		<string name="gender" title="Gender" />
 		<string name="email" title="Email" />
-		
+
 		<one-to-many name="phones" ref="Phone" mappedBy="employee" />
-		 <many-to-one name="address" ref="Address" massUpdate="true"/>
-		 <many-to-many name="project" ref="Project"/>
-		 <one-to-one name="department" ref="Department"/>
+		<many-to-one name="address" ref="Address"
+			massUpdate="true" />
+		<many-to-many name="project" ref="Project" />
+		<one-to-one name="department" ref="Department" />
 	</entity>
 
 </domain-models>

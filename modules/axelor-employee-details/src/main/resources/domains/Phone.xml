@@ -7,11 +7,11 @@
 
 	<module name="employeeDetails"
 		package="com.axelor.employeeDetails.db" />
-	<entity name="Phone" >
-	 <many-to-one name="employee" ref="Employee" required="true" />
-	<string name="contactNumber" required="true" /> 
-	<string name="alternateNumber"  /> 
-
+	<entity name="Phone">
+		<many-to-one name="employee" ref="Employee"
+			required="true" />
+		<string name="contactNumber" required="true" />
+		<string name="alternateNumber" />
 	</entity>
 
 </domain-models>

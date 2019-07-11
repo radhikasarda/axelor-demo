@@ -6,6 +6,10 @@
 
 	<grid name="employee-grid" title="Employees"
 		model="com.axelor.employeeDetails.db.Employee">
+		<toolbar>
+			<button name="reportBtn" title="Generate Report"
+				onClick="generate-report" icon="fa-print" />
+		</toolbar>
 		<field name="fullName" />
 		<field name="dateOfBirth" />
 		<field name="gender" />
@@ -22,10 +26,16 @@
 	</selection>
 
 	<form name="employee-form" title="Employee"
-		model="com.axelor.employeeDetails.db.Employee" css="panel-blue">
+		model="com.axelor.employeeDetails.db.Employee" css="panel-blue"
+		onSave="action-validate-on-employee-save">
+		<toolbar>
+			<button name="reportBtn" title="Generate Report" hideIf="!id"
+				onClick="generate-report" icon="fa-print" />
+		</toolbar>
 		<panel title="Personal Information" css="panel-red">
 			<panel colSpan="4">
-				<field name="image" showTitle="false" colSpan="12" />
+				<field name="image" showTitle="false" colSpan="12"
+					widget="image" />
 			</panel>
 			<panel colSpan="8">
 				<field name="fullName" readonly="false" colSpan="12">
@@ -41,14 +51,14 @@
 				<field name="gender" selection="gender.type.selection"
 					colSpan="5" />
 				<field name="email" widget="email" colSpan="5" />
-
+				<button name="actionMethod" title="Call Action Method"
+					onClick="action-method-call" />
 
 			</panel>
 		</panel>
-
 		<panel-related field="phones" css="panel-green"
-			title="Contact Information">
-			<field name="contactNumber" />
+			canMove="true" title="Contact Information">
+			<field name="contactNumber" onChange="action-method-call" />
 			<field name="alternateNumber" />
 		</panel-related>
 
@@ -132,11 +142,11 @@
 		<field name="phone" />
 		<field name="email" />
 		<field name="address" />
-		<field name="hasImage" />
+		<field name="image" />
 		<template><![CDATA[
       <div class="span4 card-image">
-        <img ng-if="hasImage" ng-src="{{$image(null, 'image')}}">
-        <img ng-if="!hasImage" src="img/user.png">
+        <img ng-if="image" ng-src="{{$image(null, 'image')}}">
+        <img ng-if="!image" src="img/user.png">
         <strong>{{fullName}}</strong>
       </div>
      
@@ -154,7 +164,7 @@
 
 	<kanban name="project-kanban" title="Projects"
 		model="com.axelor.employeeDetails.db.Project" columnBy="progress"
-		sequenceBy="priority" limit="10" >
+		sequenceBy="priority" limit="10">
 		<field name="name" />
 		<field name="startDate" />
 		<field name="endDate" />
@@ -167,4 +177,63 @@
     </div>
     ]]></template>
 	</kanban>
+
+	<action-validate
+		name="action-validate-on-employee-save">
+		<error message="Name is too short."
+			if="eval: firstName.length () 
+			&lt;= 2" />
+		<error message="The entered Date is inrg.a@gmail.com future"
+			if="dateOfBirth &gt; __date__" />
+		<alert
+			message="Last name is too short. Would you like to continue?"
+			if="eval: lastName.length() &lt;= 2" />
+	</action-validate>
+	<action-method name="action-method-call">
+		<call class="com.axelor.employee.web.Hello" method="say" />
+	</action-method>
+
+
+	<!-- <action-attrs name="action-on-select-email"> <attribute if="email != 
+		null" name="value:set" expr="street" for="address.street"/> </action-attrs> -->
+
+	<search-filters name="filter-projects"
+		model="com.axelor.employeeDetails.db.Project" title="Filter Projects ">
+		<filter title="To-do">
+			<domain>self.progress = 1</domain>
+		</filter>
+		<filter title="In progress">
+			<domain>self.progress = 2</domain>
+		</filter>
+		<filter title="Completed">
+			<domain>self.progress = 3</domain>
+		</filter>
+	</search-filters>
+	<action-report name="action-generate-report"
+
+		design="employee_report.rptdesign"
+		output="employee_report-${date}${time}" format="pdf">
+		<param name="id" expr="eval: id" />
+	</action-report>
+
+	<action-report output="report-${date}${time}"
+		name="action-generate-report-grid" design="report-2.rptdesign"
+		format="pdf">
+
+		<!-- <param name="_ids" expr="eval:_ids[0]" /> -->
+
+		<param name="listId" expr="eval: listId" />
+		<param name="filePath" expr="eval: filePath " />
+
+	</action-report>
+
+	<action-method name="print-context">
+		<call class="com.axelor.employee.web.Hello"
+			method="check_context" />
+	</action-method>
+
+	<action-group name="generate-report">
+		<action name="print-context" />
+		<action name="action-generate-report-grid" />
+	</action-group>
 </object-views>

@@ -4,17 +4,20 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 	<grid name="project-grid" title="Project"
-		model="com.axelor.employeeDetails.db.Project">
+		model="com.axelor.employeeDetails.db.Project" 
+		canMove="true">
+		<hilite color="info" if="progress==1" />
 		<field name="name" />
 		<field name="manager" />
 		<field name="startDate" />
 		<field name="endDate" />
 		<field name="progress" />
 		<field name="priority" />
+
 	</grid>
 	<form name="project-form" title="Project"
 		model="com.axelor.employeeDetails.db.Project"
-		onSave="action-validate-on-add-project" >
+		onSave="action-validate-on-add-project">
 		<panel title="Project Details" css="panel-blue">
 			<field name="department">
 				<editor>
@@ -30,17 +33,16 @@
 		</panel>
 	</form>
 
-<!-- 	<action-attrs name="action-attrs-project">
-	
-		<attribute for="progress" name="hidden" expr="eval: progress == 3" 
-			/>
-		<attribute name="hidden" for="progress" if="progress==3" expr="true" 
-			/>
-		<attribute for="progress" name="title" if="progress==3" expr="Completed" 
-			/>
-	</action-attrs> -->
-<action-validate name="action-validate-on-add-project">
- <alert message="End Date is Gone. Would you like to continue?" if="endDate &lt; __date__"/>
- <alert message="Start Date is Gone. Would you like to continue?" if="startDate &lt; __date__"/>
-</action-validate>
+	<!-- <action-attrs name="action-attrs-project"> <attribute for="progress" 
+		name="hidden" expr="eval: progress == 3" /> <attribute name="hidden" for="progress" 
+		if="progress==3" expr="true" /> <attribute for="progress" name="title" if="progress==3" 
+		expr="Completed" /> </action-attrs> -->
+	<action-validate name="action-validate-on-add-project">
+		<alert message="End Date is Gone. Would you like to continue?"
+			if="endDate &lt; __date__" />
+		<alert message="Start Date is Gone. Would you like to continue?"
+			if="startDate &lt; __date__" />
+	</action-validate>
+	<!-- <action-record name="action-record-project-on-new" model="com.axelor.employeeDetails.db.Project"> 
+		<field name="endDate" expr="eval: __date__"/> </action-record> -->
 </object-views>

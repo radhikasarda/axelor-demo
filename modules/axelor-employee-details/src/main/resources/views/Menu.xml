@@ -44,8 +44,9 @@
 	<action-view name="project.all" title="Project"
 		model="com.axelor.employeeDetails.db.Project">
 		<view type="grid" name="project-grid" />
-		<view type="form" name="project-form" />
-		<view type="kanban" name="project-kanban" />
+	<view type="form" name="project-form" />
+		<view type="kanban" name="project-kanban"/>
+		<view-param name="search-filters" value="filter-projects"/>
 		
 	</action-view>
 

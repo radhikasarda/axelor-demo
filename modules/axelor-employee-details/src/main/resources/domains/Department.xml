@@ -9,6 +9,7 @@
 		package="com.axelor.employeeDetails.db" />
 	<entity name="Department">
 		<string name="name" required="true" />
-	<one-to-many name="project" ref="Project" mappedBy="department" />
+		<one-to-many name="project" ref="Project"
+			mappedBy="department" />
 	</entity>
 </domain-models>
