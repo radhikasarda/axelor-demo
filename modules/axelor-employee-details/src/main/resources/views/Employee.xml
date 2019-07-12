@@ -164,7 +164,7 @@
 
 	<kanban name="project-kanban" title="Projects"
 		model="com.axelor.employeeDetails.db.Project" columnBy="progress"
-		sequenceBy="priority" limit="10">
+		sequenceBy="priority" limit="10" >
 		<field name="name" />
 		<field name="startDate" />
 		<field name="endDate" />
