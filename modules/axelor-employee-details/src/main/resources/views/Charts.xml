@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+	<chart name="chart.gender.count" title="Gender Count">
+		<dataset type="sql">
+    <![CDATA[
+
+         SELECT gender,
+          count(*) as count 
+          FROM employee_details_employee 
+          GROUP BY gender
+    ]]>
+    </dataset>
+		<category key="count" type="number" />
+		<series key="count" groupBy="gender" type="pie" />
+	</chart>
+</object-views>

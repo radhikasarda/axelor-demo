@@ -23,6 +23,7 @@
    
     ]]></string>
 		<date name="dateOfBirth" />
+		<string name="salary"/>
 		<!-- <binary name="image" title="Photo" help="Max size 4MB."
 			image="true" /> -->
 		<one-to-one name="image" ref="com.axelor.meta.db.MetaFile"/>

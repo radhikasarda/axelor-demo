@@ -13,7 +13,8 @@
 		<field name="fullName" />
 		<field name="dateOfBirth" />
 		<field name="gender" />
-		<field name="phones" />
+		<field name="salary" />
+		
 	</grid>
 	<selection name="gender.type.selection">
 		<option value="Male">Male</option>
@@ -51,9 +52,10 @@
 				<field name="gender" selection="gender.type.selection"
 					colSpan="5" />
 				<field name="email" widget="email" colSpan="5" />
-				<button name="actionMethod" title="Call Action Method"
-					onClick="action-method-call" />
-
+				
+				<!-- <button name="actionMethod" title="Call Action Method"
+					onClick="action-method-call" /> -->
+				<field name="salary" colSpan="5"></field>
 			</panel>
 		</panel>
 		<panel-related field="phones" css="panel-green"
@@ -224,7 +226,7 @@
 
 		<param name="listId" expr="eval: listId" />
 		<param name="filePath" expr="eval: filePath " />
-
+		<param name="locale" expr="eval: locale " />
 	</action-report>
 
 	<action-method name="print-context">
